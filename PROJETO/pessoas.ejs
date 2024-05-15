@@ -1,0 +1,31 @@
+<!-- pessoas.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Information</title>
+</head>
+<body>
+
+<h2>People Information</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% pessoas.forEach(function(pessoa) { %>
+            <tr>
+                <td><%= pessoa.nome %></td>
+                <td><%= pessoa.idade %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+</body>
+</html>
