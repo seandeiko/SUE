@@ -19,7 +19,7 @@ CREATE TABLE Professores (
 );
 
 CREATE TABLE Coordenadores (
-    aluno_id INT PRIMARY KEY AUTO_INCREMENT,
+    coordenador_id INT PRIMARY KEY AUTO_INCREMENT,
     usuario_id INT,
     FOREIGN KEY (usuario_id) REFERENCES Usuarios(usuario_id) ON DELETE CASCADE,
     nome VARCHAR(100),
