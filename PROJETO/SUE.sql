@@ -84,8 +84,8 @@ CREATE TABLE Presencas (
 CREATE TABLE ProfessorDisciplina (
     id INT PRIMARY KEY AUTO_INCREMENT,
     professor_id INT,
-    disciplina_id INT,
     FOREIGN KEY (professor_id) REFERENCES Professores(professor_id),
+    disciplina_id INT,
     FOREIGN KEY (disciplina_id) REFERENCES Disciplinas(disciplina_id)
 );
 
