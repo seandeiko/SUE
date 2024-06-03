@@ -1,20 +1,20 @@
-// Importar os módulos necessários utilizados pelo SEQUELIZE
-const { DataTypes, Sequelize } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const connection = require("./database");
+const Usuarios = require("./Usuarios"); // Assuming Usuarios model is defined in "Usuarios.js" file
 
-// Definição do modelo (MODEL) que corresponde à uma tabela do banco de dados.
 const Professores = connection.define(
     "Professores", 
     {
         professor_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true // Assuming this should be auto-incremented
         },
         usuario_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'Usuarios', 
+                model: Usuarios, // Reference the Usuarios model
                 key: 'usuario_id' 
             },
             onDelete: 'CASCADE'
@@ -37,20 +37,17 @@ const Professores = connection.define(
     }
 );
 
+async function sincronizarProfessor() {
+    try {
+        await Professores.sync({ force: false });
+    } catch (error) {
+        console.error("Erro ao sincronizar a tabela: ", error);
+    } finally {
+        await connection.close();
+        console.log("Conexão fechada.");
+    }
+}
 
+Professores.sync({ force: false }).then(() => {});
 
-
-    async function sincronizarProfessor() {
-        try {
-          await Professor.sync({ force: false });
-        } catch (error) {
-          console.error("Erro ao sincronizar a tabela: ", error);
-        } finally {
-          await connection.close();
-          console.log("Conexão fechada.");
-        }
-      }
-    
-      Professores.sync({ force: false }).then(() => {});
-    
-      module.exports = Professores;
+module.exports = Professores;
