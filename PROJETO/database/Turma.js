@@ -1,39 +1,42 @@
-// Importar os módulos necessários utilizados pelo SEQUELIZE
-const { DataTypes, Sequelize } = require("sequelize");
-const connection = require("./database");
+const { DataTypes } = require("sequelize");
+const connection = require("../database");
 
-// Definição do modelo (MODEL) que corresponde à uma tabela do banco de dados.
-const Turma = connection.define(
-  "Turma", // Changed the table name from "coordenador" to "Turma"
-  {
-      turma_id: {
-          type: DataTypes.INTEGER, 
-          primaryKey: true,
-      },
-      ano_letivo: {
-          type: DataTypes.INTEGER,
-      },
-      semestre: {
-          type: DataTypes.ENUM('1', '2'),
-      },
-  },
-  {
-      timestamps: false
-  }
+const Turmas = connection.define(
+    "turma",
+    {
+        id_turma: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        nome_turma: {
+            type: DataTypes.STRING(50),
+            allowNull: false,
+        },
+        turno: {
+            type: DataTypes.ENUM('Manhã', 'Tarde', 'Noite'),
+            allowNull: false,
+        },
+        ano: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+    },
+    {
+        timestamps: false
+    }
 );
-
 
 async function sincronizarTurma() {
     try {
-      await Turma.sync({ force: false });
+        await Turmas.sync({ force: false });
     } catch (error) {
-      console.error("Erro ao sincronizar a tabela: ", error);
+        console.error("Erro ao sincronizar a tabela Turmas: ", error);
     } finally {
-      await connection.close();
-      console.log("Conexão fechada.");
+        await connection.close();
+        console.log("Conexão fechada.");
     }
-  }
+}
 
-  Turma.sync({ force: false }).then(() => {});
-
-  module.exports = Turma;
+module.exports = { Turmas, sincronizarTurma };
