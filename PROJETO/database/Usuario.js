@@ -1,8 +1,6 @@
-// Importar os módulos necessários utilizados pelo SEQUELIZE
-const { DataTypes, Sequelize } = require("sequelize");
-const connection = require("./database");
+const { DataTypes } = require("sequelize");
+const connection = require("../database");
 
-// Definição do modelo (MODEL) que corresponde à uma tabela do banco de dados.
 const Usuarios = connection.define(
     "usuario",
     {
@@ -10,6 +8,7 @@ const Usuarios = connection.define(
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
+            autoIncrement: true
         },
         nome: {
             type: DataTypes.TEXT,
@@ -26,15 +25,13 @@ const Usuarios = connection.define(
 
 async function sincronizarUsuario() {
     try {
-      await Usuario.sync({ force: false });
+      await Usuarios.sync({ force: false });
     } catch (error) {
-      console.error("Erro ao sincronizar a tabela: ", error);
+      console.error("Erro ao sincronizar a tabela Usuarios: ", error);
     } finally {
       await connection.close();
       console.log("Conexão fechada.");
     }
-  }
+}
 
-  Usuarios.sync({ force: false }).then(() => {});
-
-  module.exports = Usuarios;
+module.exports = { Usuarios, sincronizarUsuario };
