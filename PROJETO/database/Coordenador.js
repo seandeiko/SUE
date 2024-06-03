@@ -1,42 +1,42 @@
-// Importar os módulos necessários utilizados pelo SEQUELIZE
-const { DataTypes, Sequelize } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const connection = require("./database");
+const Usuarios = require("./Usuarios");
 
-// Definição do modelo (MODEL) que corresponde à uma tabela do banco de dados.
 const Coordenador = connection.define(
     "coordenador",
     {
         id_coordenador: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true
         },
         usuario_id: {
             type: DataTypes.INTEGER,
-            foreingKey: true,
+            allowNull: false,
+            references: {
+                model: Usuarios,
+                key: 'usuario_id'
+            }
         },
         nome: {
             type: DataTypes.TEXT,
-
+            allowNull: false
         },
         data_nascimento: {
-            type: DataTypes.INTEGER,
-        },
-        data_nascimento: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATE
         },
         genero: {
             type: DataTypes.ENUM('masculino', 'feminino', 'Outro'),
-            allowNull: false,
+            allowNull: false
         },
         endereco: {
-            type: DataTypes.TEXT,
-        },
+            type: DataTypes.TEXT
+        }
     },
     {
         timestamps: false
     }
 );
-
 
 async function sincronizarCoordenador() {
     try {
@@ -47,8 +47,8 @@ async function sincronizarCoordenador() {
       await connection.close();
       console.log("Conexão fechada.");
     }
-  }
+}
 
-  Coordenador.sync({ force: false }).then(() => {});
+Coordenador.sync({ force: false }).then(() => {});
 
-  module.exports = Coordenador;
+module.exports = Coordenador;
