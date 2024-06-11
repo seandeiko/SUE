@@ -61,7 +61,6 @@ CREATE TABLE Matriculas (
 );
 
 CREATE TABLE Notas (
-    nota_id INT PRIMARY KEY AUTO_INCREMENT,
     aluno_id INT,
     turma_id INT,
     disciplina_id INT,
