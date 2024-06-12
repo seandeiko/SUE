@@ -2,16 +2,8 @@ CREATE DATABASE SUE;
 
 USE SUE;
 
-CREATE TABLE Usuarios (
-    usuario_id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
-    tipo ENUM('Aluno', 'Professor', 'Administrador')
-);
-
 CREATE TABLE Professores (
     professor_id INT PRIMARY KEY AUTO_INCREMENT,
-    usuario_id INT,
-    FOREIGN KEY (usuario_id) REFERENCES Usuarios(usuario_id) ON DELETE CASCADE,
     nome VARCHAR(100),
     data_nascimento DATE,
     genero ENUM('Masculino', 'Feminino', 'Outro'),
@@ -20,8 +12,6 @@ CREATE TABLE Professores (
 
 CREATE TABLE Coordenadores (
     coordenador_id INT PRIMARY KEY AUTO_INCREMENT,
-    usuario_id INT,
-    FOREIGN KEY (usuario_id) REFERENCES Usuarios(usuario_id) ON DELETE CASCADE,
     nome VARCHAR(100),
     data_nascimento DATE,
     genero ENUM('Masculino', 'Feminino', 'Outro'),
@@ -30,8 +20,6 @@ CREATE TABLE Coordenadores (
 
 CREATE TABLE Alunos (
     aluno_id INT PRIMARY KEY AUTO_INCREMENT,
-    usuario_id INT,
-    FOREIGN KEY (usuario_id) REFERENCES Usuarios(usuario_id) ON DELETE CASCADE,
     nome VARCHAR(100),
     data_nascimento DATE,
     genero ENUM('Masculino', 'Feminino', 'Outro'),
@@ -49,15 +37,6 @@ CREATE TABLE Turmas (
     turma_id INT PRIMARY KEY AUTO_INCREMENT,
     ano_letivo YEAR,
     semestre ENUM('1', '2')
-);
-
-CREATE TABLE Matriculas (
-    matricula_id INT PRIMARY KEY AUTO_INCREMENT,
-    aluno_id INT,
-    turma_id INT,
-    periodo VARCHAR(20), -- Ex: "2024/1"
-    FOREIGN KEY (aluno_id) REFERENCES Alunos(aluno_id),
-    FOREIGN KEY (turma_id) REFERENCES Turmas(turma_id)
 );
 
 CREATE TABLE Notas (
