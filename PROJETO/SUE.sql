@@ -43,10 +43,13 @@ CREATE TABLE Notas (
     aluno_id INT,
     turma_id INT,
     disciplina_id INT,
+    professor_id INT,
+    data_nota DATE,
     nota FLOAT,
     FOREIGN KEY (aluno_id) REFERENCES Alunos(aluno_id),
     FOREIGN KEY (turma_id) REFERENCES Turmas(turma_id),
-    FOREIGN KEY (disciplina_id) REFERENCES Disciplinas(disciplina_id)
+    FOREIGN KEY (disciplina_id) REFERENCES Disciplinas(disciplina_id),
+    FOREIGN KEY (professor_id) REFERENCES Professores(professor_id)
 );
 
 CREATE TABLE Presencas (
