@@ -46,6 +46,7 @@ CREATE TABLE Notas (
     professor_id INT,
     data_nota DATE,
     nota FLOAT,
+    PRIMARY KEY (aluno_id, turma_id, disciplina_id, professor_id),
     FOREIGN KEY (aluno_id) REFERENCES Alunos(aluno_id),
     FOREIGN KEY (turma_id) REFERENCES Turmas(turma_id),
     FOREIGN KEY (disciplina_id) REFERENCES Disciplinas(disciplina_id),
