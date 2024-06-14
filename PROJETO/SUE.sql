@@ -34,9 +34,11 @@ CREATE TABLE Disciplinas (
 );
 
 CREATE TABLE Turmas (
+	nome_turma TEXT,
     turma_id INT PRIMARY KEY AUTO_INCREMENT,
-    ano_letivo YEAR,
-    semestre ENUM('1', '2')
+    turno ENUM ('Manhã', 'Tarde', 'Noite'),
+    ano YEAR,
+    semestre ENUM('primeiro', 'segundo')
 );
 
 CREATE TABLE Notas (
