@@ -34,8 +34,8 @@ CREATE TABLE Disciplinas (
 );
 
 CREATE TABLE Turmas (
+	turma_id INT PRIMARY KEY AUTO_INCREMENT,
 	nome_turma TEXT,
-    turma_id INT PRIMARY KEY AUTO_INCREMENT,
     turno ENUM ('Manhã', 'Tarde', 'Noite'),
     ano YEAR,
     semestre ENUM('primeiro', 'segundo')
@@ -43,14 +43,12 @@ CREATE TABLE Turmas (
 
 CREATE TABLE Notas (
     aluno_id INT,
-    turma_id INT,
     disciplina_id INT,
     professor_id INT,
     data_nota DATE,
     nota FLOAT,
-    PRIMARY KEY (aluno_id, turma_id, disciplina_id, professor_id),
+    PRIMARY KEY (aluno_id, disciplina_id, professor_id),
     FOREIGN KEY (aluno_id) REFERENCES Alunos(aluno_id),
-    FOREIGN KEY (turma_id) REFERENCES Turmas(turma_id),
     FOREIGN KEY (disciplina_id) REFERENCES Disciplinas(disciplina_id),
     FOREIGN KEY (professor_id) REFERENCES Professores(professor_id)
 );
