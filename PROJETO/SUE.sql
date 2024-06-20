@@ -1,3 +1,7 @@
+CREATE DATABASE sue;
+
+USE sue;
+
 CREATE TABLE `alunos` (
   `aluno_id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
