@@ -20,27 +20,6 @@ CREATE TABLE `coordenadores` (
   PRIMARY KEY (`coordenador_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `coordenadors` (
-  `coordenador_id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` text NOT NULL,
-  `data_nascimento` datetime DEFAULT NULL,
-  `genero` enum('masculino','feminino','Outro') NOT NULL,
-  `endereco` text DEFAULT NULL,
-  PRIMARY KEY (`coordenador_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `cronograma` (
-  `evento_id` int(11) NOT NULL AUTO_INCREMENT,
-  `descricao` varchar(255) NOT NULL,
-  `data_inicio` date NOT NULL,
-  `data_fim` date NOT NULL,
-  `tipo` enum('Aula','Prova','Feriado','Recesso') NOT NULL,
-  `professor_id` int(11) NOT NULL,
-  PRIMARY KEY (`evento_id`),
-  KEY `professor_id` (`professor_id`),
-  CONSTRAINT `cronograma_ibfk_1` FOREIGN KEY (`professor_id`) REFERENCES `professores` (`professor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE `disciplina` (
   `disciplina_id` int(11) NOT NULL AUTO_INCREMENT,
   `nome_disciplina` varchar(50) NOT NULL,
@@ -50,14 +29,6 @@ CREATE TABLE `disciplina` (
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`disciplina_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `disciplinas` (
-  `disciplina_id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) NOT NULL,
-  `codigo` varchar(20) NOT NULL,
-  `carga_horaria` int(11) NOT NULL,
-  PRIMARY KEY (`disciplina_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `notas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -87,17 +58,6 @@ CREATE TABLE `presencas` (
   CONSTRAINT `presencas_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `alunos` (`aluno_id`),
   CONSTRAINT `presencas_ibfk_2` FOREIGN KEY (`turma_id`) REFERENCES `turmas` (`turma_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `professordisciplina` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `professor_id` int(11) NOT NULL,
-  `disciplina_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `professor_id` (`professor_id`),
-  KEY `disciplina_id` (`disciplina_id`),
-  CONSTRAINT `professordisciplina_ibfk_1` FOREIGN KEY (`professor_id`) REFERENCES `professores` (`professor_id`),
-  CONSTRAINT `professordisciplina_ibfk_2` FOREIGN KEY (`disciplina_id`) REFERENCES `disciplinas` (`disciplina_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `professores` (
   `professor_id` int(11) NOT NULL AUTO_INCREMENT,
