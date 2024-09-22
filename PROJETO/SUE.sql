@@ -9,7 +9,7 @@ CREATE TABLE `alunos` (
   `genero` enum('Masculino','Feminino','Outro') NOT NULL,
   `endereco` varchar(255) NOT NULL,
   PRIMARY KEY (`aluno_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `coordenadores` (
   `coordenador_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -20,6 +20,24 @@ CREATE TABLE `coordenadores` (
   PRIMARY KEY (`coordenador_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `professores` (
+  `professor_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `data_nascimento` date NOT NULL,
+  `genero` enum('Masculino','Feminino','Outro') NOT NULL,
+  `endereco` varchar(255) NOT NULL,
+  PRIMARY KEY (`professor_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `turmas` (
+  `turma_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_turma` text NOT NULL,
+  `turno` enum('Manhã','Tarde','Noite') NOT NULL,
+  `ano` year(4) NOT NULL,
+  `semestre` enum('primeiro','segundo') NOT NULL,
+  PRIMARY KEY (`turma_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `disciplina` (
   `disciplina_id` int(11) NOT NULL AUTO_INCREMENT,
   `nome_disciplina` varchar(50) NOT NULL,
@@ -28,7 +46,7 @@ CREATE TABLE `disciplina` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`disciplina_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `notas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -44,7 +62,7 @@ CREATE TABLE `notas` (
   CONSTRAINT `notas_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `alunos` (`aluno_id`),
   CONSTRAINT `notas_ibfk_2` FOREIGN KEY (`disciplina_id`) REFERENCES `disciplina` (`disciplina_id`),
   CONSTRAINT `notas_ibfk_3` FOREIGN KEY (`professor_id`) REFERENCES `professores` (`professor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `presencas` (
   `presenca_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -57,22 +75,4 @@ CREATE TABLE `presencas` (
   KEY `turma_id` (`turma_id`),
   CONSTRAINT `presencas_ibfk_1` FOREIGN KEY (`aluno_id`) REFERENCES `alunos` (`aluno_id`),
   CONSTRAINT `presencas_ibfk_2` FOREIGN KEY (`turma_id`) REFERENCES `turmas` (`turma_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `professores` (
-  `professor_id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(100) NOT NULL,
-  `data_nascimento` date NOT NULL,
-  `genero` enum('Masculino','Feminino','Outro') NOT NULL,
-  `endereco` varchar(255) NOT NULL,
-  PRIMARY KEY (`professor_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE `turmas` (
-  `turma_id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome_turma` text NOT NULL,
-  `turno` enum('Manhã','Tarde','Noite') NOT NULL,
-  `ano` year(4) NOT NULL,
-  `semestre` enum('primeiro','segundo') NOT NULL,
-  PRIMARY KEY (`turma_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
